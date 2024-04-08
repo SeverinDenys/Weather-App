@@ -26,7 +26,7 @@ const getWeatherTemperature = () => {
 
       document.getElementById(
         "Temperature"
-      ).innerText = `Temperature: ${weatherTemperature} Celcius;`; //display temperature in Kelvin
+      ).innerHTML = `Temperature: ${weatherTemperature} Celcius;`; //display temperature in Kelvin
     })
     .catch((error) => {
       console.error("Error:", error);
