@@ -45,16 +45,25 @@ body {
   margin-bottom: 1rem;
 }
 
-
-@media (min-width: 1000px) {
-
+@media only screen and (min-width: 1024px) {
+  #title {
+    font-size: 6rem;
+    margin-bottom: 3rem;
+  }
 }
 
-.weather-forecast {
+.weather-forecast-img {
   width: 8rem;
   height: auto;
   border-radius: 1rem;
   margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .weather-forecast-img {
+    width: 12rem;
+    height: auto;
+  }
 }
 
 /* form */
@@ -64,12 +73,29 @@ body {
   justify-content: center;
   margin-bottom: 4rem;
 }
+/* media for form */
+@media only screen and (min-width: 1024px) {
+  .form {
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+  }
+}
 
 .label-text {
   font-size: 3rem;
   margin: 0 auto;
   color: var(--primary-color);
   margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
 }
 
 input[type="text"] {
@@ -82,6 +108,9 @@ input[type="text"] {
   border-radius: 5px;
 }
 
+@media only screen and (min-width: 1024px) {
+}
+
 #searchBtn {
   margin: 0 auto;
   padding: 1rem 2rem;
@@ -92,6 +121,11 @@ input[type="text"] {
   font-family: "Merriweather", serif;
   font-style: italic;
   border: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  #searchBtn {
+  }
 }
 
 /* main container */
@@ -124,7 +158,6 @@ input[type="text"] {
   margin: 1rem 0;
 }
 
-.weather-info-image {
-  width: 10rem;
-  height: auto;
+img {
+  width: 8rem;
 }

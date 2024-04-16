@@ -20,7 +20,7 @@
       <img
         src="./src/images/weather-forecast.png"
         alt="weather-forecast"
-        class="weather-forecast"
+        class="weather-forecast-img"
       />
       <p id="Temperature"></p>
     </div>
@@ -29,6 +29,8 @@
       <form action="" class="form">
         <label for="city" class="label-text">Enter the location:</label>
         <input type="text" id="locationInput" name="locationInput" />
+        <!-- <input type="text" id="countryInput" name="countryInput" />   -->
+        <!-- add specific request for country -->
         <button type="submit" id="searchBtn">click</button>
       </form>
       <h2 id="chosenCity"></h2>
@@ -36,7 +38,8 @@
         <div class="weather-info-container">
           <h3 class="weather-info-location"> </h3>
           <h4 class="weather-info-description"> </h4>
-          <img src=" " alt="" class="weather-info-image" />
+          <!-- <img src="" alt="" class="weather-info-image" /> -->
+          <div id="imageContainer"></div>
           <p class="weather-info-temperature"> </p>
         </div>
       </section>
