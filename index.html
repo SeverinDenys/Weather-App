@@ -27,20 +27,28 @@
 
     <div class="main-container">
       <form action="" class="form">
-        <label for="city" class="label-text">Enter the location:</label>
-        <input type="text" id="locationInput" name="locationInput" />
-        <!-- <input type="text" id="countryInput" name="countryInput" />   -->
-        <!-- add specific request for country -->
+        <label for="city" class="label-text">Enter the city, comma,
+           2-letter country code:</label>
+        <input type="text" id="locationInput" name="locationInput" placeholder="Enter the city, 2-letter code" />
+         
+        
         <button type="submit" id="searchBtn">click</button>
       </form>
-      <h2 id="chosenCity"></h2>
+       
       <section id="weather-info">
+         
         <div class="weather-info-container">
+          <h2 id="chosenCity"></h2>
           <h3 class="weather-info-location"> </h3>
           <h4 class="weather-info-description"> </h4>
           <!-- <img src="" alt="" class="weather-info-image" /> -->
           <div id="imageContainer"></div>
           <p class="weather-info-temperature"> </p>
+          <div id="weather-info-future"> 
+          <h4 class="weather-info-future-description">Show next 3 hours or 5 days</h4>
+          <button type="submit" id="searchBtn2">3 hours</button>
+          <button type="submit" id="searchBtn3">5 days</button>
+        </div>
         </div>
       </section>
     <script src="./src/js/app.js"></script>

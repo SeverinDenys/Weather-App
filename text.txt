@@ -169,3 +169,4 @@ searchBtn.addEventListener("click", (e) => {
 // Problems encountered so far ///
 // Some of the cities are wrong. Like when I type Rome it gives me the city in US but not in Italy
  
+ 
