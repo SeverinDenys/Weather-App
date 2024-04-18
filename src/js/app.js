@@ -15,8 +15,11 @@ const apiKey = "0711ba8995366ec70397a048be1bafb4";
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault(); // prevent page from reloading
 
-  const locationInput = document.getElementById("locationInput").value;
-  const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${locationInput}&appid=${apiKey}&units=metric`;
+  const locationInputCity = document.getElementById("locationInputCity").value;
+  const locationInputCountry = document.getElementById(
+    "locationInputCountry"
+  ).value;
+  const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
   console.log(weatherUrl);
 
   const getWeatherTemperature = async () => {
@@ -31,68 +34,76 @@ searchBtn.addEventListener("click", (e) => {
         // Process the retrieved user data
         // pull code into separate function
         console.log("User Data:", userData);
-        const location = locationInput;
-        chosenCity.innerHTML = location;
+        const locationCity = locationInputCity;
+        chosenCity.innerHTML = locationCity;
+        const locationCountry = locationInputCity;
+        chosenCity.innerHTML = locationCountry;
         const weatherTemperature = Math.floor(userData.list[0].main.temp);
         temp.innerHTML = `${weatherTemperature} °C`;
-        const weatherMain = userData.list[0].weather[0].main;
         const weatherDescription = userData.list[0].weather[0].description;
-        description.innerHTML = weatherMain;
+        description.innerHTML = weatherDescription;
 
         container.appendChild(imgElement);
 
+        // filter the elements for today date ///
+
+        const DayList = userData.list;
+        console.log(DayList);
+
+        const todayDate = new Date().toISOString().slice(0, 10);
+        console.log(todayDate);
+
+        const showTodayArrayResult = DayList.filter((day) => {
+          // Extract the date part from the dt_txt property
+          const dayDate = day.dt_txt.slice(0, 10);
+          return dayDate === todayDate;
+        });
+
+        console.log(showTodayArrayResult);
+
+
+
         // set the image based on weather conditions
 
-        if (weatherMain === "Rain" && weatherDescription === "light rain") {
-          imgElement.src = "./src/images/rain2.png";
-        } else if (
-          weatherMain === "Rain" &&
-          weatherDescription === "shower rain"
-        ) {
-          imgElement.src = "./src/images/showerRain.png";
-        } else if (
-          weatherMain === "Clouds" &&
-          weatherDescription === "scattered clouds"
-        ) {
-          imgElement.src = "./src/images/scatteredClouds.png";
-        } else if (
-          weatherMain === "Clouds" &&
-          weatherDescription === "few clouds"
-        ) {
-          imgElement.src = "./src/images/fewClouds.png";
-        } else if (
-          weatherMain === "Clouds" &&
-          weatherDescription === "overcast clouds"
-        ) {
-          imgElement.src = "./src/images/fewClouds.png";
-        } else if (
-          weatherMain === "Clouds" &&
-          weatherDescription === "broken clouds"
-        ) {
-          imgElement.src = "./src/images/brokenClouds.png";
-        } else if (
-          weatherMain === "Clear" &&
-          weatherDescription === "clear sky"
-        ) {
-          imgElement.src = "./src/images/clearSky.png";
-        } else if (
-          weatherMain === "Thunderstorm" &&
-          weatherDescription === "thunderstorm"
-        ) {
-          imgElement.src = "./src/images/thunderstorm.png";
-        } else if (weatherMain === "Snow" && weatherDescription === "snow") {
-          imgElement.src = "./src/images/snow.png";
-        } else if (
-          weatherMain === "Snow" &&
-          weatherDescription === "light snow"
-        ) {
-          imgElement.src = "./src/images/snow.png";
-        } else if (weatherMain === "Mist" && weatherDescription === "mist") {
-          imgElement.src = "./src/images/mist.png";
+        switch (weatherDescription) {
+          case "light rain":
+            imgElement.src = "./src/images/rain2.png";
+            break;
+          case "shower rain":
+            imgElement.src = "./src/images/showerRain.png";
+            break;
+          case "scattered clouds":
+            imgElement.src = "./src/images/scatteredClouds.png";
+            break;
+          case "few clouds":
+            imgElement.src = "./src/images/fewClouds.png";
+            break;
+          case "overcast clouds":
+            imgElement.src = "./src/images/fewClouds.png";
+            break;
+          case "broken clouds":
+            imgElement.src = "./src/images/brokenClouds.png";
+            break;
+          case "clear sky":
+            imgElement.src = "./src/images/clearSky.png";
+            break;
+          case "thunderstorm":
+            imgElement.src = "./src/images/thunderstorm.png";
+            break;
+          case "snow":
+          case "light snow":
+            imgElement.src = "./src/images/snow.png";
+            break;
+          case "mist":
+            imgElement.src = "./src/images/mist.png";
+            break;
+          default:
+            break;
         }
-
         // Reset input field after displaying weather information
         resetInput();
+
+        displayBackground();
 
         // display future options button and h4 title
         displayFutureOptions();
@@ -103,7 +114,8 @@ searchBtn.addEventListener("click", (e) => {
   };
 
   const resetInput = () => {
-    document.getElementById("locationInput").value = "";
+    document.getElementById("locationInputCity").value = "";
+    document.getElementById("locationInputCountry").value = "";
   };
 
   const displayFutureOptions = () => {
@@ -124,11 +136,7 @@ searchBtn.addEventListener("click", (e) => {
 // Problems encountered so far ///
 // how to empty the input value text after click so the text doesn't stay in input field
 
-// display container background
-// const displayBackground = () => {
-//   const weatherInfoBackground = document.getElementById("weather-info");
-//   weatherInfoBackground.style.backgroundColor =
-//     "linear-gradient(135deg, rgba(255, 100, 100, 1) 0%, rgb(244, 244, 119) 100%)";
-// };
-
-// displayBackground();
+const displayBackground = () => {
+  const weatherInfoBackground = document.getElementById("weather-info");
+  weatherInfoBackground.style.visibility = "visible";
+};

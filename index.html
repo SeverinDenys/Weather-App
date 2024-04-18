@@ -27,11 +27,9 @@
 
     <div class="main-container">
       <form action="" class="form">
-        <label for="city" class="label-text">Enter the city, comma,
-           2-letter country code:</label>
-        <input type="text" id="locationInput" name="locationInput" placeholder="Enter the city, 2-letter code" />
-         
         
+        <input type="text" id="locationInputCity" name="locationInput" placeholder="Enter the city" />
+        <input type="text" id="locationInputCountry" name="locationInput" placeholder="Enter 2-letter code" />
         <button type="submit" id="searchBtn">click</button>
       </form>
        
@@ -49,6 +47,18 @@
           <button type="submit" id="searchBtn2">3 hours</button>
           <button type="submit" id="searchBtn3">5 days</button>
         </div>
+        </div>
+      </section>
+
+      <!-- 3 hours weather info-section -->
+      <section id="weather-info-hourly">
+        <div class="weather-info-hourly-container"> 
+          <p class="weather-info-hourly-time">12 00 </p>
+          <p class="weather-info-hourly-description">light rain</p>
+          <div class="imageContainer">
+            <img src="./src/images/brokenClouds.png" alt="">
+          </div>
+          <p class="weather-info-hourly-temperature">7 °C</p>
         </div>
       </section>
     <script src="./src/js/app.js"></script>
