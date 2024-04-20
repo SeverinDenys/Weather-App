@@ -7,6 +7,7 @@ const description = document.querySelector(".weather-info-description");
 let imgElement = document.createElement("img");
 imgElement.src = "";
 let container = document.getElementById("imageContainer");
+container.appendChild(imgElement);
 
 // Specify the API endpoint for user data
 const apiKey = "0711ba8995366ec70397a048be1bafb4";
@@ -42,26 +43,6 @@ searchBtn.addEventListener("click", (e) => {
         temp.innerHTML = `${weatherTemperature} °C`;
         const weatherDescription = userData.list[0].weather[0].description;
         description.innerHTML = weatherDescription;
-
-        container.appendChild(imgElement);
-
-        // filter the elements for today date ///
-
-        const DayList = userData.list;
-        console.log(DayList);
-
-        const todayDate = new Date().toISOString().slice(0, 10);
-        console.log(todayDate);
-
-        const showTodayArrayResult = DayList.filter((day) => {
-          // Extract the date part from the dt_txt property
-          const dayDate = day.dt_txt.slice(0, 10);
-          return dayDate === todayDate;
-        });
-
-        console.log(showTodayArrayResult);
-
-
 
         // set the image based on weather conditions
 
@@ -107,6 +88,36 @@ searchBtn.addEventListener("click", (e) => {
 
         // display future options button and h4 title
         displayFutureOptions();
+
+        // filter the elements for today date ///
+
+        const DayList = userData.list;
+        console.log(DayList);
+
+        const todayDate = new Date().toISOString().slice(0, 10);
+        console.log(todayDate);
+
+        const showTodayArrayResult = DayList.filter((day) => {
+          // Extract the date part from the dt_txt property
+          const dayDate = day.dt_txt.slice(0, 10);
+          return dayDate === todayDate;
+        });
+
+        console.log(showTodayArrayResult);
+
+        // storing the values of todays array separately
+
+        let temperatures = [];
+        let weatherDescriptions = [];
+        let temperaturesOfDate = [];
+        for (let temperature of showTodayArrayResult) {
+          temperatures.push(temperature.main.temp);
+          weatherDescriptions.push(temperature.weather[0].description);
+          temperaturesOfDate.push(temperature.dt_txt.slice(11, 16));
+        }
+        console.log(temperatures);
+        console.log(weatherDescriptions);
+        console.log(temperaturesOfDate);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -140,3 +151,17 @@ const displayBackground = () => {
   const weatherInfoBackground = document.getElementById("weather-info");
   weatherInfoBackground.style.visibility = "visible";
 };
+
+let weatherImages = [
+  { description: "light rain", src: "./src/images/rain2.png" },
+  { description: "shower rain", src: "./src/images/showerRain.png" },
+  { description: "scattered clouds", src: "./src/images/scatteredClouds.png" },
+  { description: "few clouds", src: "./src/images/fewClouds.png" },
+  { description: "overcast clouds", src: "./src/images/overcastClouds.png" },
+  { description: "broken clouds", src: "./src/images/brokenClouds.png" },
+  { description: "clear sky", src: "./src/images/clearSky.png" },
+  { description: "thunderstorm", src: "./src/images/thunderstorm.png" },
+  { description: "snow", src: "./src/images/snow.png" },
+  { description: "light snow", src: "./src/images/snow.png" },
+  { description: "mist", src: "./src/images/mist.png" },
+];

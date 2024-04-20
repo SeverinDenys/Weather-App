@@ -19,3 +19,9 @@ console.log(todayDay);
         const dayDate = day.dt_dtx.slice(0, 10);
         return dayDate === todayDate;
         }
+
+
+   let temperatures = [];
+        for (let temperature of showTodayArrayResult) {
+          temperatures.push(temperature.main.temp);
+        }
