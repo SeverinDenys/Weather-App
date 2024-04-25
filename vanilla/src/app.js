@@ -2,6 +2,31 @@ const searchBtn = document.getElementById("searchBtn");
 const chosenCity = document.getElementById("chosenCity");
 const temp = document.querySelector(".weather-info-temperature");
 const description = document.querySelector(".weather-info-description");
+const currentLocation = document.getElementById("currentLocation");
+const currentLocationTemperature = document.getElementById(
+  "currentLocationTemperature"
+);
+
+const currentLocationPosition = navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const lat = position.coords.latitude;
+    const long = position.coords.longitude;
+
+    const apiKey = "0711ba8995366ec70397a048be1bafb4";
+    const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+
+    fetch(weatherUrl)
+      .then((response) => response.json())
+      .then((weatherData) => {
+        const currentLocationCityCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
+        currentLocation.innerHTML = currentLocationCityCountry;
+        const localTemp = Math.floor(weatherData.list[0].main.temp);
+
+        localTemp.innerHTML = `${localTemp} °C`;
+      })
+      .catch((error) => console.log(error));
+  }
+);
 
 // create an image
 let imgElement = document.createElement("img");
@@ -49,35 +74,35 @@ searchBtn.addEventListener("click", (e) => {
 
         switch (weatherDescription) {
           case "light rain":
-            imgElement.src = "./src/images/rain2.png";
+            imgElement.src = "./public/images/rain2.png";
             break;
           case "shower rain":
-            imgElement.src = "./src/images/showerRain.png";
+            imgElement.src = "./public/images/showerRain.png";
             break;
           case "scattered clouds":
-            imgElement.src = "./src/images/scatteredClouds.png";
+            imgElement.src = "./public/images/scatteredClouds.png";
             break;
           case "few clouds":
-            imgElement.src = "./src/images/fewClouds.png";
+            imgElement.src = "./public/images/fewClouds.png";
             break;
           case "overcast clouds":
-            imgElement.src = "./src/images/fewClouds.png";
+            imgElement.src = "./public/images/overcastClouds.png";
             break;
           case "broken clouds":
-            imgElement.src = "./src/images/brokenClouds.png";
+            imgElement.src = "./public/images/brokenClouds.png";
             break;
           case "clear sky":
-            imgElement.src = "./src/images/clearSky.png";
+            imgElement.src = "./public/images/clearSky.png";
             break;
           case "thunderstorm":
-            imgElement.src = "./src/images/thunderstorm.png";
+            imgElement.src = "./public/images/thunderstorm.png";
             break;
           case "snow":
           case "light snow":
-            imgElement.src = "./src/images/snow.png";
+            imgElement.src = "./public/images/snow.png";
             break;
           case "mist":
-            imgElement.src = "./src/images/mist.png";
+            imgElement.src = "./public/images/mist.png";
             break;
           default:
             break;
@@ -86,9 +111,6 @@ searchBtn.addEventListener("click", (e) => {
         resetInput();
 
         displayBackground();
-
-        // display future options button and h4 title
-        displayFutureOptions();
 
         // filter the elements for today date ///
 
@@ -106,7 +128,6 @@ searchBtn.addEventListener("click", (e) => {
 
         console.log(showTodayArrayResult);
         // map over showTodayArrayResult
-
 
         // storing the values of todays array separately
         // let temperatures = [];
@@ -131,18 +152,6 @@ searchBtn.addEventListener("click", (e) => {
     document.getElementById("locationInputCountry").value = "";
   };
 
-  const displayFutureOptions = () => {
-    const weatherInfoFutureDescription = document.querySelector(
-      ".weather-info-future-description"
-    );
-    const searchBtn2 = document.getElementById("searchBtn2");
-    const searchBtn3 = document.getElementById("searchBtn3");
-
-    weatherInfoFutureDescription.style.visibility = "visible";
-    searchBtn2.style.visibility = "visible";
-    searchBtn3.style.visibility = "visible";
-  };
-
   console.log(getWeatherTemperature());
 });
 
@@ -153,17 +162,3 @@ const displayBackground = () => {
   const weatherInfoBackground = document.getElementById("weather-info");
   weatherInfoBackground.style.visibility = "visible";
 };
-
-let weatherImages = [
-  { description: "light rain", src: "./src/images/rain2.png" },
-  { description: "shower rain", src: "./src/images/showerRain.png" },
-  { description: "scattered clouds", src: "./src/images/scatteredClouds.png" },
-  { description: "few clouds", src: "./src/images/fewClouds.png" },
-  { description: "overcast clouds", src: "./src/images/overcastClouds.png" },
-  { description: "broken clouds", src: "./src/images/brokenClouds.png" },
-  { description: "clear sky", src: "./src/images/clearSky.png" },
-  { description: "thunderstorm", src: "./src/images/thunderstorm.png" },
-  { description: "snow", src: "./src/images/snow.png" },
-  { description: "light snow", src: "./src/images/snow.png" },
-  { description: "mist", src: "./src/images/mist.png" },
-];

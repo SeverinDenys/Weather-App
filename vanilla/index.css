@@ -66,6 +66,13 @@ body {
   }
 }
 
+#currentLocation,
+#currentLocationTemperature {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
 /* form */
 .form {
   display: flex;
@@ -104,9 +111,7 @@ input[type="text"] {
 @media only screen and (min-width: 1024px) {
 }
 
-#searchBtn,
-#searchBtn2,
-#searchBtn3 {
+#searchBtn {
   margin: 0 auto;
   padding: 1rem 2rem;
   font-size: 2rem;
@@ -116,13 +121,6 @@ input[type="text"] {
   font-family: "Merriweather", serif;
   font-style: italic;
   border: none;
-}
-
-#searchBtn2,
-#searchBtn3 {
-  visibility: hidden;
-  margin-right: 1rem;
-  margin-left: 1rem;
 }
 
 .weather-info-future-description {
