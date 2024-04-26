@@ -6,6 +6,18 @@ const currentLocation = document.getElementById("currentLocation");
 const currentLocationTemperature = document.getElementById(
   "currentLocationTemperature"
 );
+const weatherInfoHourlyContainer = document.querySelector(
+  ".weather-info-hourly-container"
+);
+const weatherInfoHourlyTime = document.querySelector(
+  ".weather-info-hourly-time"
+);
+const weatherInfoHourlyDescription = document.querySelector(
+  ".weather-info-hourly-description"
+);
+const weatherInfoHourlyTemperature = document.querySelector(
+  ".weather-info-hourly-temperature"
+);
 
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
@@ -22,7 +34,7 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
         currentLocation.innerHTML = currentLocationCityCountry;
         const localTemp = Math.floor(weatherData.list[0].main.temp);
 
-        localTemp.innerHTML = `${localTemp} °C`;
+        currentLocationTemperature.innerHTML = `${localTemp} °C`;
       })
       .catch((error) => console.log(error));
   }
@@ -127,7 +139,16 @@ searchBtn.addEventListener("click", (e) => {
         });
 
         console.log(showTodayArrayResult);
+
         // map over showTodayArrayResult
+
+        const showResultForThreeHours = showTodayArrayResult.map((e) => {
+          const InfoHourlyTemperature = Math.floor(e.main.temp);
+          weatherInfoHourlyTemperature.innerHTML = `${InfoHourlyTemperature}°C`;
+          weatherInfoHourlyDescription.innerHTML = e.weather[0].description;
+        });
+
+        console.log(showResultForThreeHours);
 
         // storing the values of todays array separately
         // let temperatures = [];
@@ -142,6 +163,7 @@ searchBtn.addEventListener("click", (e) => {
         // console.log(weatherDescriptions);
         // console.log(temperaturesOfDate);
       })
+
       .catch((error) => {
         console.error("Error:", error);
       });
