@@ -19,11 +19,16 @@ const weatherInfoHourlyTemperature = document.querySelector(
   ".weather-info-hourly-temperature"
 );
 
+const currentLocationRightNow = navigator.geolocation.getCurrentPosition((position) => {
+  console.log(position.coords.latitude, position.coords.longitude);
+});
+
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
 
+    // NIT: You don't need to cal the apiKey again, you've already declared it in line 56
     const apiKey = "0711ba8995366ec70397a048be1bafb4";
     const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
@@ -131,6 +136,17 @@ searchBtn.addEventListener("click", (e) => {
 
         const todayDate = new Date().toISOString().slice(0, 10);
         console.log(todayDate);
+
+        const filterTodayWeather = userData.list.filter((todayWeather) => todayWeather.dt_txt.includes(todayDate));
+        console.log({filterTodayWeather});
+
+        const mapTodayWeather = filterTodayWeather.map((todayWeather) => {
+          console.log(todayWeather.main.temp);
+          console.log(todayWeather.weather[0].description);
+          console.log(todayWeather.dt_txt);
+        });
+
+        console.log({mapTodayWeather});
 
         const showTodayArrayResult = DayList.filter((day) => {
           // Extract the date part from the dt_txt property
