@@ -24,7 +24,6 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
 
-    const apiKey = "0711ba8995366ec70397a048be1bafb4";
     const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
     fetch(weatherUrl)
@@ -132,23 +131,34 @@ searchBtn.addEventListener("click", (e) => {
         const todayDate = new Date().toISOString().slice(0, 10);
         console.log(todayDate);
 
+        const filterTodayWeather = userData.list.filter((todayWeather) =>
+          todayWeather.dt_txt.includes(todayDate)
+        );
+        console.log(filterTodayWeather);
+
+        filterTodayWeather.forEach((todayWeather) => {
+          // creating container for each temperature value
+          const temperatureContainer = document.createElement("div");
+
+          const temperatureDisplay = document.createElement("p");
+          temperatureDisplay.innerHTML = todayWeather.main.temp;
+          temperatureDisplay.classList.add("weather-info-hourly-temperature");
+
+          temperatureContainer.appendChild(temperatureDisplay);
+
+          weatherInfoHourlyContainer.appendChild(temperatureContainer);
+        });
+
         const showTodayArrayResult = DayList.filter((day) => {
           // Extract the date part from the dt_txt property
-          const dayDate = day.dt_txt.slice(0, 10);
+          const dayDate = day.dt_txt.slice(11);
+
           return dayDate === todayDate;
         });
 
         console.log(showTodayArrayResult);
 
-        // map over showTodayArrayResult
-
-        const showResultForThreeHours = showTodayArrayResult.map((e) => {
-          const InfoHourlyTemperature = Math.floor(e.main.temp);
-          weatherInfoHourlyTemperature.innerHTML = `${InfoHourlyTemperature}°C`;
-          weatherInfoHourlyDescription.innerHTML = e.weather[0].description;
-        });
-
-        console.log(showResultForThreeHours);
+        // // map over showTodayArrayResult
 
         // storing the values of todays array separately
         // let temperatures = [];

@@ -187,11 +187,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.weather-info-hourly-time,
-.weather-info-hourly-description,
-.weather-info-hourly-temperature {
   font-size: 2rem;
 }
 
