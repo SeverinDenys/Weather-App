@@ -136,17 +136,39 @@ searchBtn.addEventListener("click", (e) => {
         );
         console.log(filterTodayWeather);
 
-        filterTodayWeather.forEach((todayWeather) => {
-          // creating container for each temperature value
-          const temperatureContainer = document.createElement("div");
+        filterTodayWeather.map((todayWeather) => {
+          const time = todayWeather.dt_txt.slice(11, 16);
+          const temperature = `${Math.round(todayWeather.main.temp)} °C`;
+          const description = todayWeather.weather[0].description;
 
+          // Create a container for all data
+          const dataContainer = document.createElement("div");
+          dataContainer.classList.add("weather-info-hourly-data");
+
+          // Apply flexbox styling to the container
+          dataContainer.style.display = "flex";
+
+          // Create and append time display
+          const timeDisplay = document.createElement("p");
+          timeDisplay.innerHTML = time;
+          timeDisplay.classList.add("weather-info-hourly-time");
+          dataContainer.appendChild(timeDisplay);
+
+          // Create and append description display
+          const descriptionDisplay = document.createElement("p");
+          descriptionDisplay.innerHTML = description;
+          descriptionDisplay.classList.add("weather-info-hourly-description");
+          dataContainer.appendChild(descriptionDisplay);
+
+          // Create and append temperature display
           const temperatureDisplay = document.createElement("p");
-          temperatureDisplay.innerHTML = todayWeather.main.temp;
+          temperatureDisplay.innerHTML = temperature;
           temperatureDisplay.classList.add("weather-info-hourly-temperature");
+          dataContainer.appendChild(temperatureDisplay);
 
-          temperatureContainer.appendChild(temperatureDisplay);
-
-          weatherInfoHourlyContainer.appendChild(temperatureContainer);
+          // Append the data container to the hourly container
+          weatherInfoHourlyContainer.appendChild(dataContainer);
+          displayBackgroundHourlyWeather();
         });
 
         const showTodayArrayResult = DayList.filter((day) => {
@@ -157,21 +179,6 @@ searchBtn.addEventListener("click", (e) => {
         });
 
         console.log(showTodayArrayResult);
-
-        // // map over showTodayArrayResult
-
-        // storing the values of todays array separately
-        // let temperatures = [];
-        // let weatherDescriptions = [];
-        // let temperaturesOfDate = [];
-        // for (let temperature of showTodayArrayResult) {
-        //   temperatures.push(temperature.main.temp);
-        //   weatherDescriptions.push(temperature.weather[0].description);
-        //   temperaturesOfDate.push(temperature.dt_txt.slice(11, 16));
-        // }
-        // console.log(temperatures);
-        // console.log(weatherDescriptions);
-        // console.log(temperaturesOfDate);
       })
 
       .catch((error) => {
@@ -187,10 +194,14 @@ searchBtn.addEventListener("click", (e) => {
   console.log(getWeatherTemperature());
 });
 
-// Problems encountered so far ///
-// how to empty the input value text after click so the text doesn't stay in input field
-
 const displayBackground = () => {
   const weatherInfoBackground = document.getElementById("weather-info");
   weatherInfoBackground.style.visibility = "visible";
+};
+
+const displayBackgroundHourlyWeather = () => {
+  const weatherInfoBackgroundHourly = document.querySelector(
+    ".weather-info-hourly-container"
+  );
+  weatherInfoBackgroundHourly.style.visibility = "visible";
 };
