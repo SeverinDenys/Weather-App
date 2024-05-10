@@ -6,6 +6,9 @@ const currentLocation = document.getElementById("currentLocation");
 const currentLocationTemperature = document.getElementById(
   "currentLocationTemperature"
 );
+const currentLocationDescription = document.getElementById(
+  "currentTemperatureDescription"
+);
 const weatherInfoHourlyContainer = document.querySelector(
   ".weather-info-hourly-container"
 );
@@ -17,6 +20,10 @@ const weatherInfoHourlyDescription = document.querySelector(
 );
 const weatherInfoHourlyTemperature = document.querySelector(
   ".weather-info-hourly-temperature"
+);
+
+const weatherInfoDailyContainer = document.querySelector(
+  ".weather-info-daily-container"
 );
 
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
@@ -32,14 +39,59 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
         const currentLocationCityCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
         currentLocation.innerHTML = currentLocationCityCountry;
         const localTemp = Math.floor(weatherData.list[0].main.temp);
-
+        const localTempDesc = weatherData.list[0].weather[0].description;
+        currentLocationDescription.innerHTML = localTempDesc;
         currentLocationTemperature.innerHTML = `${localTemp} °C`;
+
+        // create image your location
+        let currentImgElement = document.createElement("img");
+        currentImgElement.src = "";
+        let currentImgContainer = document.getElementById(
+          "currentLocationImageContainer"
+        );
+        currentImgContainer.appendChild(currentImgElement);
+
+        switch (localTempDesc) {
+          case "light rain":
+            currentImgElement.src = "./public/images/rain2.png";
+            break;
+          case "shower rain":
+            currentImgElement.src = "./public/images/showerRain.png";
+            break;
+          case "scattered clouds":
+            currentImgElement.src = "./public/images/scatteredClouds.png";
+            break;
+          case "few clouds":
+            currentImgElement.src = "./public/images/fewClouds.png";
+            break;
+          case "overcast clouds":
+            currentImgElement.src = "./public/images/overcastClouds.png";
+            break;
+          case "broken clouds":
+            currentImgElement.src = "./public/images/brokenClouds.png";
+            break;
+          case "clear sky":
+            currentImgElement.src = "./public/images/clearSky.png";
+            break;
+          case "thunderstorm":
+            currentImgElement.src = "./public/images/thunderstorm.png";
+            break;
+          case "snow":
+          case "light snow":
+            currentImgElement.src = "./public/images/snow.png";
+            break;
+          case "mist":
+            currentImgElement.src = "./public/images/mist.png";
+            break;
+          default:
+            break;
+        }
       })
       .catch((error) => console.log(error));
   }
 );
 
-// create an image
+// create an image chosen location
 let imgElement = document.createElement("img");
 imgElement.src = "";
 let container = document.getElementById("imageContainer");
@@ -125,16 +177,57 @@ searchBtn.addEventListener("click", (e) => {
 
         // filter the elements for today date ///
 
-        const DayList = userData.list;
-        console.log(DayList);
+        const WeatherData = userData.list;
+        console.log({ WeatherData });
 
+        // 5 days period
+
+        const filterWeatherFiveDays = WeatherData.filter((Data) =>
+          Data.dt_txt.includes("12:00:00")
+        );
+        console.log({ filterWeatherFiveDays });
+
+        filterWeatherFiveDays.map((dailyWeather) => {
+          const dailyTime = dailyWeather.dt_txt.slice(0, 11);
+          const dailyTemp = `${Math.round(dailyWeather.main.temp)} °C`;
+          const dailyDesc = dailyWeather.weather[0].description;
+
+          // Create a container for all data
+          const dailyDataContainer = document.createElement("div");
+          dailyDataContainer.classList.add("weather-info-daily-data");
+
+          // Apply flexbox styling to the container
+          dailyDataContainer.style.display = "flex";
+
+          // Create and append time display
+          const timeDisplay = document.createElement("p");
+          timeDisplay.innerHTML = dailyTime;
+          timeDisplay.classList.add("weather-info-daily-time");
+          dailyDataContainer.appendChild(timeDisplay);
+
+          // Create and append description display
+          const descriptionDisplay = document.createElement("p");
+          descriptionDisplay.innerHTML = dailyDesc;
+          descriptionDisplay.classList.add("weather-info-daily-description");
+          dailyDataContainer.appendChild(descriptionDisplay);
+
+          // Create and append temperature display
+          const temperatureDisplay = document.createElement("p");
+          temperatureDisplay.innerHTML = dailyTemp;
+          temperatureDisplay.classList.add("weather-info-daily-temperature");
+          dailyDataContainer.appendChild(temperatureDisplay);
+
+          // Append the data container to the hourly container
+          weatherInfoDailyContainer.appendChild(dailyDataContainer);
+          displayBackgroundDailyWeather();
+        });
+
+        // three hours period
         const todayDate = new Date().toISOString().slice(0, 10);
-        console.log(todayDate);
 
-        const filterTodayWeather = userData.list.filter((todayWeather) =>
+        const filterTodayWeather = WeatherData.filter((todayWeather) =>
           todayWeather.dt_txt.includes(todayDate)
         );
-        console.log(filterTodayWeather);
 
         filterTodayWeather.map((todayWeather) => {
           const time = todayWeather.dt_txt.slice(11, 16);
@@ -171,7 +264,9 @@ searchBtn.addEventListener("click", (e) => {
           displayBackgroundHourlyWeather();
         });
 
-        const showTodayArrayResult = DayList.filter((day) => {
+        // 5 days period
+
+        const showTodayArrayResult = WeatherData.filter((day) => {
           // Extract the date part from the dt_txt property
           const dayDate = day.dt_txt.slice(11);
 
@@ -205,3 +300,13 @@ const displayBackgroundHourlyWeather = () => {
   );
   weatherInfoBackgroundHourly.style.visibility = "visible";
 };
+
+const displayBackgroundDailyWeather = () => {
+  const weatherInfoBackgroundDaily = document.querySelector(
+    ".weather-info-daily-container"
+  );
+  weatherInfoBackgroundDaily.style.visibility = "visible";
+};
+
+/* bugs encountered */
+/* adding new city will add new temperature to 3hour container without deleting the previous data */

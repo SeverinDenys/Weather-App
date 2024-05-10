@@ -25,7 +25,10 @@
       <div id="currentInfo"> 
         <p class="currentLocationText">Your Location:</p>
       <h2 id="currentLocation"></h2>
+      <h2 id="currentTemperatureDescription"></h2>
+       <div id="currentLocationImageContainer"></div>
       <h2 id="currentLocationTemperature"></h2>
+      
     </div>
     </div>
 
@@ -37,8 +40,8 @@
         <button type="submit" id="searchBtn">Submit</button>
       </form>
        
-     
-      <section id="weather-info">
+     <div class="container"> 
+      <section id="weather-info" class="section">
         <div class="weather-info-container">
           <p class="weather-info-searched-city">Searched city:</p>
           <h2 id="chosenCity"></h2>
@@ -54,11 +57,20 @@
       </section>
 
       <!-- 3 hours weather info-section -->
-      <section id="weather-info-hourly">
+      <section id="weather-info-hourly" class="section">
         <div class="weather-info-hourly-container"> 
+          <p class="weather-info-hour-period">three hours period:</p>
         </div>
+        
       </section>
 
+      
+    </div>
+    <section id="weather-info-daily">
+      <div class="weather-info-daily-container"> 
+        <p class="weather-info-daily-period">5 days period:</p>
+      </div>
+    </section>
      
     <script src="./src/app.js"></script>
   </body>
