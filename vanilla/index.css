@@ -220,9 +220,9 @@ input[type="text"] {
   margin: 1rem 0;
 }
 
-img {
+/* img {
   width: 8rem;
-}
+} */
 
 .weather-info-hourly-container {
   margin: 2rem auto;
@@ -249,8 +249,18 @@ img {
     padding: 2rem 3rem 0 3rem;
   }
 }
+
 .weather-info-hourly-data {
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .weather-info-hourly-data {
+    font-size: 2.5rem;
+  }
 }
 
 .weather-info-hour-period {
@@ -274,7 +284,7 @@ img {
 /* container + weather info section   */
 @media only screen and (min-width: 1024px) {
   .container {
-    width: 70rem;
+    width: 80rem;
     display: flex;
     justify-content: center;
     margin-top: 3rem;
@@ -287,7 +297,6 @@ img {
   margin: 0 auto 2rem;
   background-color: rgb(42, 5, 177);
   border-radius: 2.5rem;
-
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
@@ -301,23 +310,49 @@ img {
 @media only screen and (min-width: 1024px) {
   .weather-info-daily-container {
     margin-top: 5rem;
-    max-width: 50rem;
     padding: 2rem 6rem 0 6rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     font-size: 2rem;
+    margin-left: 6rem;
+  }
+}
+/* option one */
+/* .weather-info-daily-data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 26rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+} */
+
+/* option two */
+.weather-info-daily-data {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .weather-info-daily-data {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
   }
 }
 
 .weather-info-daily-period {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 @media only screen and (min-width: 1024px) {
   .weather-info-daily-period {
     margin: 0 auto 2rem;
+    font-size: 3rem;
   }
 }
 
@@ -325,7 +360,6 @@ img {
 .weather-info-daily-description,
 .weather-info-daily-temperature {
   margin-left: 1rem;
-  margin-bottom: 1rem;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -333,6 +367,5 @@ img {
   .weather-info-daily-description,
   .weather-info-daily-temperature {
     margin-left: 2rem;
-    margin-bottom: 2rem;
   }
 }
