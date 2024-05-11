@@ -201,6 +201,12 @@ input[type="text"] {
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);
 }
 
+@media only screen and (min-width: 1024px) {
+  #weather-info {
+    height: 37rem;
+  }
+}
+
 .weather-info-container {
   display: flex;
   flex-direction: column;
@@ -247,6 +253,7 @@ input[type="text"] {
     margin-top: 0;
     max-width: 50rem;
     padding: 2rem 3rem 0 3rem;
+    height: 37rem;
   }
 }
 
@@ -309,13 +316,14 @@ input[type="text"] {
 /* media for daily container */
 @media only screen and (min-width: 1024px) {
   .weather-info-daily-container {
-    margin-top: 5rem;
+    margin-top: 2rem;
     padding: 2rem 6rem 0 6rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     font-size: 2rem;
-    margin-left: 6rem;
+    margin-left: 8rem;
+    width: 71rem;
   }
 }
 /* option one */
@@ -338,8 +346,8 @@ input[type="text"] {
 
 @media only screen and (min-width: 1024px) {
   .weather-info-daily-data {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
   }
 }
 
