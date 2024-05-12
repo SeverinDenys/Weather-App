@@ -138,34 +138,54 @@ searchBtn.addEventListener("click", (e) => {
         switch (weatherDescription) {
           case "light rain":
             imgElement.src = "./public/images/rain2.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/lightRainBackground.jpg")';
             break;
           case "shower rain":
             imgElement.src = "./public/images/showerRain.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/rainShowerBackground.jpg")';
             break;
           case "scattered clouds":
             imgElement.src = "./public/images/scatteredClouds.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/scatteredCloudsBackground.jpg")';
             break;
           case "few clouds":
             imgElement.src = "./public/images/fewClouds.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/fewCloudsBackground.jpg")';
             break;
           case "overcast clouds":
             imgElement.src = "./public/images/brokenClouds.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/overcastCloudsBackground.jpg")';
             break;
           case "broken clouds":
             imgElement.src = "./public/images/brokenClouds.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/brokenCloudsBackground.jpg")';
             break;
           case "clear sky":
             imgElement.src = "./public/images/clearSky.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/clearSkyBackground.jpg")';
             break;
           case "thunderstorm":
             imgElement.src = "./public/images/thunderstorm.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/thunderstormBackground.jpg")';
             break;
           case "snow":
           case "light snow":
             imgElement.src = "./public/images/snow.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/snowBackground.jpg")';
             break;
           case "mist":
             imgElement.src = "./public/images/mist.png";
+            document.body.style.backgroundImage =
+              'url("./public/images/mistBackground.jpg")';
             break;
           default:
             break;
@@ -392,3 +412,8 @@ const displayBackgroundDailyWeather = () => {
 
 /* bugs encountered */
 /* adding new city will add new temperature to 3hour container without deleting the previous data */
+
+// heavy intensity rain and moderate rain png icons find and add
+// make daily container same width as two other
+
+// enter p red notification with alert - enter the proper country code or country, not number and not empty value
