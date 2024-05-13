@@ -9,6 +9,9 @@ const currentLocationTemperature = document.getElementById(
 const currentLocationDescription = document.getElementById(
   "currentTemperatureDescription"
 );
+
+const weatherInfo = document.getElementById("weather-info");
+
 const weatherInfoHourlyContainer = document.querySelector(
   ".weather-info-hourly-container"
 );
@@ -53,6 +56,7 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
 
         switch (localTempDesc) {
           case "light rain":
+          case "moderate rain":
             currentImgElement.src = "./public/images/rain2.png";
             break;
           case "shower rain":
@@ -109,6 +113,7 @@ searchBtn.addEventListener("click", (e) => {
   const locationInputCountry = document.getElementById(
     "locationInputCountry"
   ).value;
+
   const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
   console.log(weatherUrl);
 
@@ -137,6 +142,7 @@ searchBtn.addEventListener("click", (e) => {
 
         switch (weatherDescription) {
           case "light rain":
+          case "moderate rain":
             imgElement.src = "./public/images/rain2.png";
             document.body.style.backgroundImage =
               'url("./public/images/lightRainBackground.jpg")';
@@ -192,8 +198,9 @@ searchBtn.addEventListener("click", (e) => {
         }
         // Reset input field after displaying weather information
         resetInput();
-
         displayBackground();
+
+        // /////////////// 3 HOURS PERIOD FUNCTIONALITY /////////////
 
         // filter the elements for today date ///
 
@@ -227,6 +234,7 @@ searchBtn.addEventListener("click", (e) => {
 
           switch (description) {
             case "light rain":
+            case "moderate rain":
               threeHoursImgElement.src = "./public/images/rain2.png";
               break;
             case "shower rain":
@@ -311,6 +319,7 @@ searchBtn.addEventListener("click", (e) => {
 
           switch (dailyDesc) {
             case "light rain":
+            case "moderate rain":
               fiveDaysImgElement.src = "./public/images/rain2.png";
               break;
             case "shower rain":
@@ -410,10 +419,32 @@ const displayBackgroundDailyWeather = () => {
   weatherInfoBackgroundDaily.style.visibility = "visible";
 };
 
-/* bugs encountered */
-/* adding new city will add new temperature to 3hour container without deleting the previous data */
+const clearContainerToday = () => (weatherInfo.innerText = "");
+const clearContainerHourly = () => (weatherInfoHourlyContainer.innerText = "");
+const clearContainerDaily = () => (weatherInfoDailyContainer.innerText = "");
 
-// heavy intensity rain and moderate rain png icons find and add
-// make daily container same width as two other
+/*  - bugs encountered and stuff to add*/
+/* 1- BUG /// adding new city will add new temperature to 3hour container without deleting the previous data */
 
-// enter p red notification with alert - enter the proper country code or country, not number and not empty value
+/* 2-BUG /// enter just the country code and it shows me random city in the country code */
+
+// 3-heavy intensity rain png icons find and add
+// 4- make daily container same width as two other
+
+// 5- enter input required
+
+// 6- enter p red notification with alert - enter the proper country code or country, not number and not empty value
+
+//  6 solution part
+
+// if (locationInputCity === "" || locationInputCountry === "") {
+//   // Update the placeholder or some other visible element to show the message
+//   document.getElementById("locationInputCity").placeholder =
+//     "Please enter the city";
+//   document.getElementById("locationInputCity").style.border = "2px solid red";
+
+//   document.getElementById("locationInputCountry").placeholder =
+//     "Please enter the country";
+//   document.getElementById("locationInputCountry").style.border =
+//     "2px solid red";
+// }
