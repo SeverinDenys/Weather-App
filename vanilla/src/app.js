@@ -29,6 +29,38 @@ const weatherInfoDailyContainer = document.querySelector(
   ".weather-info-daily-container"
 );
 
+const getWeatherImage = (description) => {
+  switch (description) {
+    case "light rain":
+    case "moderate rain":
+      return "./images/rain2.png";
+    case "shower rain":
+      return "./images/showerRain.png";
+    case "scattered clouds":
+      return "./images/scatteredClouds.png";
+    case "few clouds":
+      return "./images/fewClouds.png";
+    case "overcast clouds":
+      return "./images/brokenClouds.png";
+    case "broken clouds":
+      return "./images/brokenClouds.png";
+    case "clear sky":
+      return "./images/clearSky.png";
+    case "thunderstorm":
+      return "./images/thunderstorm.png";
+    case "snow":
+    case "light snow":
+      return "./images/snow.png";
+    case "mist":
+      return "./images/mist.png";
+    default:
+      return "";
+  }
+}
+
+// Hide this API key
+const apiKey = "0711ba8995366ec70397a048be1bafb4";
+
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
     const lat = position.coords.latitude;
@@ -48,48 +80,12 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
 
         // create image your location
         let currentImgElement = document.createElement("img");
-        currentImgElement.src = "";
+        currentImgElement.src = getWeatherImage(localTempDesc);
         let currentImgContainer = document.getElementById(
           "currentLocationImageContainer"
         );
         currentImgContainer.appendChild(currentImgElement);
 
-        switch (localTempDesc) {
-          case "light rain":
-          case "moderate rain":
-            currentImgElement.src = "./public/images/rain2.png";
-            break;
-          case "shower rain":
-            currentImgElement.src = "./public/images/showerRain.png";
-            break;
-          case "scattered clouds":
-            currentImgElement.src = "./public/images/scatteredClouds.png";
-            break;
-          case "few clouds":
-            currentImgElement.src = "./public/images/fewClouds.png";
-            break;
-          case "overcast clouds":
-            currentImgElement.src = "./public/images/brokenClouds.png";
-            break;
-          case "broken clouds":
-            currentImgElement.src = "./public/images/brokenClouds.png";
-            break;
-          case "clear sky":
-            currentImgElement.src = "./public/images/clearSky.png";
-            break;
-          case "thunderstorm":
-            currentImgElement.src = "./public/images/thunderstorm.png";
-            break;
-          case "snow":
-          case "light snow":
-            currentImgElement.src = "./public/images/snow.png";
-            break;
-          case "mist":
-            currentImgElement.src = "./public/images/mist.png";
-            break;
-          default:
-            break;
-        }
       })
       .catch((error) => console.log(error));
   }
@@ -102,12 +98,25 @@ let container = document.getElementById("imageContainer");
 container.appendChild(imgElement);
 
 // Specify the API endpoint for user data
-// Hide this API key
-const apiKey = "0711ba8995366ec70397a048be1bafb4";
 
 // display the input API request
-searchBtn.addEventListener("click", (e) => {
-  e.preventDefault(); // prevent page from reloading
+searchBtn.addEventListener("click", (event) => {
+  console.log("searchBtn clicked");
+
+  const locationInputCityInputField = document.getElementById("locationInputCity");
+  const locationInputCountryInputField = document.getElementById("locationInputCountry");
+
+  // Validate the input fields
+  if (!locationInputCityInputField.checkValidity() || !locationInputCountryInputField.checkValidity()) {
+    // Display validation messages for invalid fields
+    if (!locationInputCityInputField.checkValidity()) {
+      locationInputCityInputField.reportValidity();
+    }
+    if (!locationInputCountryInputField.checkValidity()) {
+      locationInputCountryInputField.reportValidity();
+    }
+    return;
+  }
 
   const locationInputCity = document.getElementById("locationInputCity").value;
   const locationInputCountry = document.getElementById(
@@ -138,7 +147,7 @@ searchBtn.addEventListener("click", (e) => {
         const weatherDescription = userData.list[0].weather[0].description;
         description.innerText = weatherDescription;
 
-        // set the image based on weather conditions
+         // set the image based on weather conditions
 
         switch (weatherDescription) {
           case "light rain":
@@ -196,6 +205,7 @@ searchBtn.addEventListener("click", (e) => {
           default:
             break;
         }
+
         // Reset input field after displaying weather information
         resetInput();
         displayBackground();
@@ -203,7 +213,6 @@ searchBtn.addEventListener("click", (e) => {
         // /////////////// 3 HOURS PERIOD FUNCTIONALITY /////////////
 
         // filter the elements for today date ///
-
         const WeatherData = userData.list;
         console.log({ WeatherData });
 
@@ -213,6 +222,8 @@ searchBtn.addEventListener("click", (e) => {
         const filterTodayWeather = WeatherData.filter((todayWeather) =>
           todayWeather.dt_txt.includes(todayDate)
         );
+
+        weatherInfoHourlyContainer.innerText = "";
 
         filterTodayWeather.map((todayWeather) => {
           const time = todayWeather.dt_txt.slice(11, 16);
@@ -228,46 +239,9 @@ searchBtn.addEventListener("click", (e) => {
 
           // create image 3 hour period
           let threeHoursImgElement = document.createElement("img");
-          threeHoursImgElement.src = "";
+          threeHoursImgElement.src = getWeatherImage(description);
           threeHoursImgElement.style.width = "4rem";
           dataContainer.appendChild(threeHoursImgElement);
-
-          switch (description) {
-            case "light rain":
-            case "moderate rain":
-              threeHoursImgElement.src = "./public/images/rain2.png";
-              break;
-            case "shower rain":
-              threeHoursImgElement.src = "./public/images/showerRain.png";
-              break;
-            case "scattered clouds":
-              threeHoursImgElement.src = "./public/images/scatteredClouds.png";
-              break;
-            case "few clouds":
-              threeHoursImgElement.src = "./public/images/fewClouds.png";
-              break;
-            case "overcast clouds":
-              threeHoursImgElement.src = "./public/images/brokenClouds.png";
-              break;
-            case "broken clouds":
-              threeHoursImgElement.src = "./public/images/brokenClouds.png";
-              break;
-            case "clear sky":
-              threeHoursImgElement.src = "./public/images/clearSky.png";
-              break;
-            case "thunderstorm":
-              threeHoursImgElement.src = "./public/images/thunderstorm.png";
-              break;
-            case "snow":
-            case "light snow":
-              threeHoursImgElement.src = "./public/images/snow.png";
-              break;
-            case "mist":
-              threeHoursImgElement.src = "./public/images/mist.png";
-              break;
-            default:
-              break;
-          }
 
           // Create and append time display
           const timeDisplay = document.createElement("p");
@@ -293,6 +267,7 @@ searchBtn.addEventListener("click", (e) => {
         });
 
         // 5 days period
+        weatherInfoDailyContainer.innerText = "";
 
         const filterWeatherFiveDays = WeatherData.filter((Data) =>
           Data.dt_txt.includes("12:00:00")
@@ -313,46 +288,9 @@ searchBtn.addEventListener("click", (e) => {
 
           // create image 5 days period
           let fiveDaysImgElement = document.createElement("img");
-          fiveDaysImgElement.src = "";
+          fiveDaysImgElement.src = getWeatherImage(dailyDesc);
           fiveDaysImgElement.style.width = "4rem";
           dailyDataContainer.appendChild(fiveDaysImgElement);
-
-          switch (dailyDesc) {
-            case "light rain":
-            case "moderate rain":
-              fiveDaysImgElement.src = "./public/images/rain2.png";
-              break;
-            case "shower rain":
-              fiveDaysImgElement.src = "./public/images/showerRain.png";
-              break;
-            case "scattered clouds":
-              fiveDaysImgElement.src = "./public/images/scatteredClouds.png";
-              break;
-            case "few clouds":
-              fiveDaysImgElement.src = "./public/images/fewClouds.png";
-              break;
-            case "overcast clouds":
-              fiveDaysImgElement.src = "./public/images/brokenClouds.png";
-              break;
-            case "broken clouds":
-              fiveDaysImgElement.src = "./public/images/brokenClouds.png";
-              break;
-            case "clear sky":
-              fiveDaysImgElement.src = "./public/images/clearSky.png";
-              break;
-            case "thunderstorm":
-              fiveDaysImgElement.src = "./public/images/thunderstorm.png";
-              break;
-            case "snow":
-            case "light snow":
-              fiveDaysImgElement.src = "./public/images/snow.png";
-              break;
-            case "mist":
-              fiveDaysImgElement.src = "./public/images/mist.png";
-              break;
-            default:
-              break;
-          }
 
           // Create and append time display
           const timeDisplay = document.createElement("p");
@@ -419,6 +357,8 @@ const displayBackgroundDailyWeather = () => {
   weatherInfoBackgroundDaily.style.visibility = "visible";
 };
 
+
+// NOTE: This function is not being used - you had the right idea but you need to call this function after you have fetched the data and before you display the data
 const clearContainerToday = () => (weatherInfo.innerText = "");
 const clearContainerHourly = () => (weatherInfoHourlyContainer.innerText = "");
 const clearContainerDaily = () => (weatherInfoDailyContainer.innerText = "");
