@@ -7,7 +7,7 @@
 }
 
 :root {
-  --primary-color: white;
+  --primary-color: rgb(244, 234, 215);
   --cold-color: blue;
   --foggy-color: gray;
 }
@@ -22,9 +22,13 @@ body {
   overflow-x: hidden;
   background: linear-gradient(
     90deg,
-    rgba(84, 77, 198, 1) 0%,
+    rgb(193, 181, 106) 0%,
     rgba(0, 228, 255, 1) 98%
   );
+  /* background-image: url(./public/images/clearSkyBackground.jpg); */
+  background-repeat: no-repeat;
+
+  background-size: cover;
   font-family: "Merriweather", serif;
   font-style: italic;
 }
@@ -38,10 +42,13 @@ body {
 }
 
 #title {
-  color: var(--primary-color);
+  color: black;
   margin: 0 auto;
   font-size: 4.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  background: var(--primary-color);
+  padding: 1rem;
+  border-radius: 2rem;
 }
 /* media for title */
 
@@ -49,6 +56,7 @@ body {
   #title {
     font-size: 6rem;
     margin-bottom: 3rem;
+    padding: 1rem 2rem;
   }
 }
 
@@ -68,15 +76,16 @@ body {
 }
 
 #currentInfo {
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
-    rgb(13, 205, 42) 0%,
+    rgb(224, 212, 98) 0%,
     rgb(119, 244, 138) 100%
-  );
-  border-radius: 2rem;
+  ); */
+  border-radius: 3rem;
   padding: 2rem 2rem 0 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);
+  background: var(--primary-color);
 }
 
 /* media for currentInfo */
@@ -91,7 +100,7 @@ body {
 #currentLocationTemperature,
 #currentTemperatureDescription {
   font-size: 3rem;
-  color: var(--primary-color);
+  color: black;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -99,7 +108,7 @@ body {
 .currentLocationText {
   font-size: 2rem;
   text-align: center;
-  color: var(--primary-color);
+  color: black;
   margin-bottom: 2rem;
 }
 
@@ -138,6 +147,8 @@ input[type="text"] {
   border: none;
   border-radius: 5px;
 }
+
+ 
 
 @media only screen and (min-width: 1024px) {
   input[type="text"] {
@@ -188,12 +199,9 @@ input[type="text"] {
 #weather-info {
   visibility: hidden;
   display: flex;
-  justify-content: center; /* Center the content horizontally */
-  background: linear-gradient(
-    135deg,
-    rgba(255, 100, 100, 1) 0%,
-    rgb(244, 244, 119) 100%
-  );
+  justify-content: center;
+  background: var(--primary-color);
+  color: black;
   border-radius: 3rem;
   padding: 2rem 4rem;
   max-width: 28rem;
@@ -223,7 +231,7 @@ input[type="text"] {
 .weather-info-description,
 .weather-info-temperature {
   font-size: 3rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 /* img {
@@ -233,12 +241,13 @@ input[type="text"] {
 .weather-info-hourly-container {
   margin: 2rem auto;
 
-  background-color: rgb(5, 177, 5);
+  background: var(--primary-color);
+  color: black;
   border-radius: 2.5rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  font-size: 2rem;
+  font-size: 1.8rem;
   flex-direction: column;
   padding: 2rem 1rem 0 1rem;
   visibility: hidden;
@@ -302,7 +311,8 @@ input[type="text"] {
 
 .weather-info-daily-container {
   margin: 0 auto 2rem;
-  background-color: rgb(42, 5, 177);
+  background: var(--primary-color);
+  color: black;
   border-radius: 2.5rem;
   justify-content: center;
   align-items: center;
@@ -317,13 +327,15 @@ input[type="text"] {
 @media only screen and (min-width: 1024px) {
   .weather-info-daily-container {
     margin-top: 2rem;
-    padding: 2rem 6rem 0 6rem;
+    padding: 2rem 6rem 0 9rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     font-size: 2rem;
-    margin-left: 8rem;
-    width: 71rem;
+    margin-left: 5rem;
+    max-width: 72rem;
+    width: 100%; /* Add this line */
+    flex-grow: 1; /* Add this line */
   }
 }
 /* option one */
@@ -340,7 +352,7 @@ input[type="text"] {
 .weather-info-daily-data {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 2rem;
 }
 
@@ -348,6 +360,9 @@ input[type="text"] {
   .weather-info-daily-data {
     font-size: 3rem;
     margin-bottom: 2rem;
+    border: 3px solid black;
+    border-radius: 1rem;
+    padding-right: 2rem;
   }
 }
 
@@ -371,9 +386,13 @@ input[type="text"] {
 }
 
 @media only screen and (min-width: 1024px) {
-  .weather-info-daily-time,
   .weather-info-daily-description,
   .weather-info-daily-temperature {
     margin-left: 2rem;
+  }
+
+  .weather-info-daily-time {
+    border-left: 3px solid black;
+    padding-left: 2rem;
   }
 }

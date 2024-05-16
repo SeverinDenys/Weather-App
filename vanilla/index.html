@@ -18,60 +18,58 @@
     <div class="title-container">
       <h1 id="title">Weather App</h1>
       <img
-        src="./public/images/weather-forecast.png"
+        src="./images/weather-forecast.png"
         alt="weather-forecast"
         class="weather-forecast-img"
       />
-      <div id="currentInfo"> 
+      <div id="currentInfo">
         <p class="currentLocationText">Your Location:</p>
       <h2 id="currentLocation"></h2>
       <h2 id="currentTemperatureDescription"></h2>
        <div id="currentLocationImageContainer" class="currentLocationImageContainer"></div>
       <h2 id="currentLocationTemperature"></h2>
-      
+
     </div>
     </div>
 
     <div class="main-container">
-      <form action="" class="form">
-        
-        <input type="text" id="locationInputCity" name="locationInput" placeholder="Enter the city" />
-        <input type="text" id="locationInputCountry" name="locationInput" placeholder="Enter 2-letter code" />
-        <button type="submit" id="searchBtn">Submit</button>
-      </form>
-       
-     <div class="container"> 
+        <!-- NOTE: The reason why required doesn't work is because you are handling the form submission is being handled handled manually by JS and not by the browser. -->
+        <input type="text" id="locationInputCity" name="locationInput" placeholder="Enter the city" required/>
+        <input type="text" id="locationInputCountry" name="locationInput" placeholder="Enter 2-letter code" required/>
+        <button type="button" id="searchBtn">Submit</button>
+
+     <div class="container">
       <section id="weather-info" class="section">
         <div class="weather-info-container">
           <p class="weather-info-searched-city">Searched city:</p>
           <h2 id="chosenCity"></h2>
           <h3 class="weather-info-location"> </h3>
           <h4 class="weather-info-description"> </h4>
- 
+
           <div id="imageContainer"></div>
           <p class="weather-info-temperature"> </p>
-          <div id="weather-info-future"> 
-        
+          <div id="weather-info-future">
+
         </div>
         </div>
       </section>
 
       <!-- 3 hours weather info-section -->
       <section id="weather-info-hourly" class="section">
-        <div class="weather-info-hourly-container"> 
+        <div class="weather-info-hourly-container">
           <p class="weather-info-hour-period">three hours period:</p>
         </div>
-        
+
       </section>
 
-      
+
     </div>
     <section id="weather-info-daily">
-      <div class="weather-info-daily-container"> 
+      <div class="weather-info-daily-container">
         <p class="weather-info-daily-period">5 days period:</p>
       </div>
     </section>
-     
+
     <script src="./src/app.js"></script>
   </body>
 </html>
