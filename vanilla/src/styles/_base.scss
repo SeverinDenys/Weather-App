@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: linear-gradient(
+    90deg,
+    rgb(193, 181, 106) 0%,
+    rgba(0, 228, 255, 1) 98%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+}

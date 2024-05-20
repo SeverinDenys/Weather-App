@@ -1,0 +1,81 @@
+@import "./variables";
+
+/* title section */
+.title-container {
+  display: flex;
+  flex-direction: column; // Arrange items vertically
+  align-items: center; // Center items horizontally
+  margin-top: 5rem;
+
+  // Title styling
+  #title {
+    color: $primary-black;
+    margin: 0 auto;
+    font-size: 4.5rem;
+    margin-bottom: 3rem;
+    background: $primary-color;
+    padding: 1rem;
+    border-radius: 2rem;
+
+    // Media query for larger screens
+    @media only screen and (min-width: 1024px) {
+      font-size: 6rem;
+      margin-bottom: 3rem;
+      padding: 1rem 2rem;
+    }
+  }
+
+  .weather-forecast-img {
+    width: 12rem;
+    height: auto;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+
+    @media only screen and (min-width: 1024px) {
+      width: 14rem;
+      height: auto;
+    }
+  }
+
+  #currentInfo {
+    border-radius: 3rem;
+    padding: 2rem 2rem 0 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);
+    background: $primary-color;
+
+    /* media for currentInfo */
+    @media only screen and (min-width: 1024px) {
+      width: 30rem;
+      padding: 3rem 2rem 1rem 2rem;
+    }
+  }
+
+  #currentLocation,
+  #currentLocationTemperature,
+  #currentTemperatureDescription {
+    font-size: 3rem;
+    color: $primary-black;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 4rem;
+    }
+  }
+
+  .currentLocationText {
+    font-size: 2rem;
+    text-align: center;
+    color: $primary-black;
+    margin-bottom: 2rem;
+    @media only screen and (min-width: 1024px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  #currentLocationImageContainer {
+    text-align: center;
+  }
+}

@@ -1,0 +1,89 @@
+repetitive code
+
+// create an image chosen location
+let imgElement = document.createElement("img");
+imgElement.src = "";
+let container = document.getElementById("imageContainer");
+container.appendChild(imgElement);
+
+
+  // create image 3 hour period
+          let threeHoursImgElement = document.createElement("img");
+          threeHoursImgElement.src = getWeatherImage(description);
+          threeHoursImgElement.style.width = "4rem";
+          dataContainer.appendChild(threeHoursImgElement);
+
+          // Create and append time display
+          const timeDisplay = document.createElement("p");
+          timeDisplay.innerText = time;
+          timeDisplay.classList.add("weather-info-hourly-time");
+          dataContainer.appendChild(timeDisplay);
+
+          // Create and append description display
+          const descriptionDisplay = document.createElement("p");
+          descriptionDisplay.innerText = description;
+          descriptionDisplay.classList.add("weather-info-hourly-description");
+          dataContainer.appendChild(descriptionDisplay);
+
+          // Create and append temperature display
+          const temperatureDisplay = document.createElement("p");
+          temperatureDisplay.innerText = temperature;
+          temperatureDisplay.classList.add("weather-info-hourly-temperature");
+          dataContainer.appendChild(temperatureDisplay);
+
+          // Append the data container to the hourly container
+          weatherInfoHourlyContainer.appendChild(dataContainer);
+          displayBackgroundHourlyWeather();
+        });
+
+
+// 5 days period
+
+  // Create a container for all data
+          const dailyDataContainer = document.createElement("div");
+          dailyDataContainer.classList.add("weather-info-daily-data");
+
+          // Apply flexbox styling to the container
+          dailyDataContainer.style.display = "flex";
+
+          // create image 5 days period
+          let fiveDaysImgElement = document.createElement("img");
+          fiveDaysImgElement.src = getWeatherImage(dailyDesc);
+          fiveDaysImgElement.style.width = "4rem";
+          dailyDataContainer.appendChild(fiveDaysImgElement);
+
+          // Create and append time display
+          const timeDisplay = document.createElement("p");
+          timeDisplay.innerText = dailyTime;
+          timeDisplay.classList.add("weather-info-daily-time");
+          dailyDataContainer.appendChild(timeDisplay);
+
+          // Create and append description display
+          const descriptionDisplay = document.createElement("p");
+          descriptionDisplay.innerText = dailyDesc;
+          descriptionDisplay.classList.add("weather-info-daily-description");
+          dailyDataContainer.appendChild(descriptionDisplay);
+
+          // Create and append temperature display
+          const temperatureDisplay = document.createElement("p");
+          temperatureDisplay.innerText = dailyTemp;
+          temperatureDisplay.classList.add("weather-info-daily-temperature");
+          dailyDataContainer.appendChild(temperatureDisplay);
+
+          // Append the data container to the hourly container
+          weatherInfoDailyContainer.appendChild(dailyDataContainer);
+          displayBackgroundDailyWeather();
+        });
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+$primary-color: rgb(244, 234, 215);
+$cold-color: blue;
+$foggy-color: gray;

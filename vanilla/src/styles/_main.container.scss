@@ -1,0 +1,16 @@
+/* main container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  #chosenCity {
+    text-align: center;
+    font-size: 4rem;
+  }
+
+  #currentLocationImageContainer {
+    text-align: center;
+  }
+}

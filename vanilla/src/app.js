@@ -56,36 +56,68 @@ const getWeatherImage = (description) => {
     default:
       return "";
   }
-}
+};
 
-// Hide this API key
+const getWeatherBackground = (backgroundDescription) => {
+  switch (backgroundDescription) {
+    case "light rain":
+      return "./public/images/lightRainBackground.jpg";
+    case "moderate rain":
+      return "./public/images/lightRainBackground.jpg";
+    case "shower rain":
+      return "./public/images/rainShowerBackground.jpg";
+    case "scattered clouds":
+      return "./public/images/scatteredCloudsBackground.jpg";
+    case "few clouds":
+      return "./public/images/fewCloudsBackground.jpg";
+    case "overcast clouds":
+      return "./public/images/overcastCloudsBackground.jpg";
+    case "broken clouds":
+      return "./public/images/brokenCloudsBackground.jpg";
+    case "clear sky":
+      return "./public/images/clearSkyBackground.jpg";
+    case "thunderstorm":
+      return "./public/images/thunderstormBackground.jpg";
+    case "snow":
+    case "light snow":
+      return "./public/images/snowBackground.jpg";
+    case "mist":
+      return "./public/images/mistBackground.jpg";
+    default:
+      return "";
+  }
+};
+
+const createImageContainer = () => {}; // not used yet
+
+// Hide this API key ... HOW?
 const apiKey = "0711ba8995366ec70397a048be1bafb4";
 
+// get you current position weather information
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
-
     const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
     fetch(weatherUrl)
       .then((response) => response.json())
       .then((weatherData) => {
-        const currentLocationCityCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
-        currentLocation.innerText = currentLocationCityCountry;
-        const localTemp = Math.floor(weatherData.list[0].main.temp);
-        const localTempDesc = weatherData.list[0].weather[0].description;
-        currentLocationDescription.innerText = localTempDesc;
-        currentLocationTemperature.innerText = `${localTemp} °C`;
+        const currentLocationCityAndCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
+        currentLocation.innerText = currentLocationCityAndCountry;
+        const localTemperature = Math.floor(weatherData.list[0].main.temp);
+        const localTempDescription = weatherData.list[0].weather[0].description;
+        currentLocationDescription.innerText = localTempDescription;
+        currentLocationTemperature.innerText = `${localTemperature} °C`;
 
         // create image your location
         let currentImgElement = document.createElement("img");
-        currentImgElement.src = getWeatherImage(localTempDesc);
+        currentImgElement.src = getWeatherImage(localTempDescription);
+
         let currentImgContainer = document.getElementById(
           "currentLocationImageContainer"
         );
         currentImgContainer.appendChild(currentImgElement);
-
       })
       .catch((error) => console.log(error));
   }
@@ -97,23 +129,24 @@ imgElement.src = "";
 let container = document.getElementById("imageContainer");
 container.appendChild(imgElement);
 
-// Specify the API endpoint for user data
-
 // display the input API request
-searchBtn.addEventListener("click", (event) => {
-  console.log("searchBtn clicked");
-
-  const locationInputCityInputField = document.getElementById("locationInputCity");
-  const locationInputCountryInputField = document.getElementById("locationInputCountry");
+searchBtn.addEventListener("click", () => {
+  const locationCityInputField = document.getElementById("locationInputCity");
+  const locationCountryInputField = document.getElementById(
+    "locationInputCountry"
+  );
 
   // Validate the input fields
-  if (!locationInputCityInputField.checkValidity() || !locationInputCountryInputField.checkValidity()) {
+  if (
+    !locationCityInputField.checkValidity() ||
+    !locationCountryInputField.checkValidity()
+  ) {
     // Display validation messages for invalid fields
-    if (!locationInputCityInputField.checkValidity()) {
-      locationInputCityInputField.reportValidity();
+    if (!locationCityInputField.checkValidity()) {
+      locationCountryInputField.reportValidity();
     }
-    if (!locationInputCountryInputField.checkValidity()) {
-      locationInputCountryInputField.reportValidity();
+    if (!locationCityInputField.checkValidity()) {
+      locationCountryInputField.reportValidity();
     }
     return;
   }
@@ -147,64 +180,11 @@ searchBtn.addEventListener("click", (event) => {
         const weatherDescription = userData.list[0].weather[0].description;
         description.innerText = weatherDescription;
 
-         // set the image based on weather conditions
-
-        switch (weatherDescription) {
-          case "light rain":
-          case "moderate rain":
-            imgElement.src = "./public/images/rain2.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/lightRainBackground.jpg")';
-            break;
-          case "shower rain":
-            imgElement.src = "./public/images/showerRain.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/rainShowerBackground.jpg")';
-            break;
-          case "scattered clouds":
-            imgElement.src = "./public/images/scatteredClouds.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/scatteredCloudsBackground.jpg")';
-            break;
-          case "few clouds":
-            imgElement.src = "./public/images/fewClouds.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/fewCloudsBackground.jpg")';
-            break;
-          case "overcast clouds":
-            imgElement.src = "./public/images/brokenClouds.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/overcastCloudsBackground.jpg")';
-            break;
-          case "broken clouds":
-            imgElement.src = "./public/images/brokenClouds.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/brokenCloudsBackground.jpg")';
-            break;
-          case "clear sky":
-            imgElement.src = "./public/images/clearSky.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/clearSkyBackground.jpg")';
-            break;
-          case "thunderstorm":
-            imgElement.src = "./public/images/thunderstorm.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/thunderstormBackground.jpg")';
-            break;
-          case "snow":
-          case "light snow":
-            imgElement.src = "./public/images/snow.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/snowBackground.jpg")';
-            break;
-          case "mist":
-            imgElement.src = "./public/images/mist.png";
-            document.body.style.backgroundImage =
-              'url("./public/images/mistBackground.jpg")';
-            break;
-          default:
-            break;
-        }
+        // set the image and background based on weather conditions
+        imgElement.src = getWeatherImage(weatherDescription);
+        document.body.style.backgroundImage = `url(${getWeatherBackground(
+          weatherDescription
+        )})`;
 
         // Reset input field after displaying weather information
         resetInput();
@@ -212,13 +192,10 @@ searchBtn.addEventListener("click", (event) => {
 
         // /////////////// 3 HOURS PERIOD FUNCTIONALITY /////////////
 
-        // filter the elements for today date ///
         const WeatherData = userData.list;
-        console.log({ WeatherData });
-
-        // three hours period
         const todayDate = new Date().toISOString().slice(0, 10);
 
+        // filter the elements for today date ///
         const filterTodayWeather = WeatherData.filter((todayWeather) =>
           todayWeather.dt_txt.includes(todayDate)
         );
@@ -266,13 +243,12 @@ searchBtn.addEventListener("click", (event) => {
           displayBackgroundHourlyWeather();
         });
 
-        // 5 days period
+        // /////////////// 5 Days PERIOD FUNCTIONALITY /////////////
         weatherInfoDailyContainer.innerText = "";
 
         const filterWeatherFiveDays = WeatherData.filter((Data) =>
           Data.dt_txt.includes("12:00:00")
         );
-        console.log({ filterWeatherFiveDays });
 
         filterWeatherFiveDays.map((dailyWeather) => {
           const dailyTime = dailyWeather.dt_txt.slice(2, 11);
@@ -356,35 +332,3 @@ const displayBackgroundDailyWeather = () => {
   );
   weatherInfoBackgroundDaily.style.visibility = "visible";
 };
-
-
-// NOTE: This function is not being used - you had the right idea but you need to call this function after you have fetched the data and before you display the data
-const clearContainerToday = () => (weatherInfo.innerText = "");
-const clearContainerHourly = () => (weatherInfoHourlyContainer.innerText = "");
-const clearContainerDaily = () => (weatherInfoDailyContainer.innerText = "");
-
-/*  - bugs encountered and stuff to add*/
-/* 1- BUG /// adding new city will add new temperature to 3hour container without deleting the previous data */
-
-/* 2-BUG /// enter just the country code and it shows me random city in the country code */
-
-// 3-heavy intensity rain png icons find and add
-// 4- make daily container same width as two other
-
-// 5- enter input required
-
-// 6- enter p red notification with alert - enter the proper country code or country, not number and not empty value
-
-//  6 solution part
-
-// if (locationInputCity === "" || locationInputCountry === "") {
-//   // Update the placeholder or some other visible element to show the message
-//   document.getElementById("locationInputCity").placeholder =
-//     "Please enter the city";
-//   document.getElementById("locationInputCity").style.border = "2px solid red";
-
-//   document.getElementById("locationInputCountry").placeholder =
-//     "Please enter the country";
-//   document.getElementById("locationInputCountry").style.border =
-//     "2px solid red";
-// }

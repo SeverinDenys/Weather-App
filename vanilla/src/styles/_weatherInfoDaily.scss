@@ -1,0 +1,76 @@
+@import "./variables";
+/* weather 5 days */
+
+.weather-info-daily-container {
+  margin: 0 auto 2rem;
+  background: $primary-color;
+  color: $primary-black;
+  border-radius: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  flex-direction: column;
+  padding: 2rem 1rem 2rem 1rem;
+  visibility: hidden;
+  box-shadow: 0 0 3rem $primary-black;
+
+  /* media for daily container */
+  @media only screen and (min-width: 1024px) {
+    margin-top: 2rem;
+    padding: 2rem 6rem 0 9rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 2rem;
+    margin-left: 5rem;
+    max-width: 72rem;
+    width: 100%; /* Add this line */
+    flex-grow: 1; /* Add this line */
+  }
+
+  .weather-info-daily-data {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      border: 3px solid $primary-black;
+      border-radius: 1rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .weather-info-daily-period {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+
+    @media only screen and (min-width: 1024px) {
+      margin: 0 auto 2rem;
+      font-size: 3rem;
+    }
+  }
+
+  .weather-info-daily-time,
+  .weather-info-daily-description,
+  .weather-info-daily-temperature {
+    margin-left: 1rem;
+
+    @media only screen and (min-width: 1024px) {
+      &.weather-info-daily-time {
+        border-left: 3px solid $primary-black;
+        padding-left: 2rem;
+      }
+    }
+  }
+
+  .weather-info-daily-description,
+  .weather-info-daily-temperature {
+    @media only screen and (min-width: 1024px) {
+      margin-left: 2rem;
+    }
+  }
+}
