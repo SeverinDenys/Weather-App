@@ -22,7 +22,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     font-size: 2rem;
-    margin-left: 5rem;
+    margin-left: 3rem;
     max-width: 72rem;
     width: 100%; /* Add this line */
     flex-grow: 1; /* Add this line */
@@ -35,7 +35,7 @@
     margin-bottom: 2rem;
 
     @media only screen and (min-width: 1024px) {
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 2rem;
       border: 3px solid $primary-black;
       border-radius: 1rem;

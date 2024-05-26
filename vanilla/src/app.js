@@ -1,3 +1,5 @@
+const apiKey = "0711ba8995366ec70397a048be1bafb4";
+console.log(apiKey);
 const searchBtn = document.getElementById("searchBtn");
 const chosenCity = document.getElementById("chosenCity");
 const temp = document.querySelector(".weather-info-temperature");
@@ -88,10 +90,52 @@ const getWeatherBackground = (backgroundDescription) => {
   }
 };
 
-const createImageContainer = () => {}; // not used yet
+// function to create and append weather elements
+const createWeatherElement = (
+  container,
+  time,
+  description,
+  temperature,
+  getImageSrc
+) => {
+  const dataContainer = document.createElement("div");
+  dataContainer.classList.add("weather-info-data");
+
+  // apply flexbox styling to the container
+  dataContainer.style.display = "flex";
+
+  // dataContainer.style.flexDirection = "column";
+  dataContainer.style.alignItems = "center";
+
+  // Create image element
+  let imgElement = document.createElement("img");
+  imgElement.src = getImageSrc(description);
+  imgElement.style.width = "4rem";
+  dataContainer.appendChild(imgElement);
+
+  // Create and append time display
+  const timeDisplay = document.createElement("p");
+  timeDisplay.innerText = time;
+  timeDisplay.classList.add("weather-info-time");
+  dataContainer.appendChild(timeDisplay);
+
+  // Create and append description display
+  const descriptionDisplay = document.createElement("p");
+  descriptionDisplay.innerText = description;
+  descriptionDisplay.classList.add("weather-info-description");
+  dataContainer.appendChild(descriptionDisplay);
+
+  // Create and append temperature display
+  const temperatureDisplay = document.createElement("p");
+  temperatureDisplay.innerText = temperature;
+  temperatureDisplay.classList.add("weather-info-temperature");
+  dataContainer.appendChild(temperatureDisplay);
+
+  // Append the data container to the provided container
+  container.appendChild(dataContainer);
+};
 
 // Hide this API key ... HOW?
-const apiKey = "0711ba8995366ec70397a048be1bafb4";
 
 // get you current position weather information
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
@@ -184,7 +228,8 @@ searchBtn.addEventListener("click", () => {
         imgElement.src = getWeatherImage(weatherDescription);
         document.body.style.backgroundImage = `url(${getWeatherBackground(
           weatherDescription
-        )})`;
+        )})`; //
+        console.log(getWeatherBackground(weatherDescription));
 
         // Reset input field after displaying weather information
         resetInput();
@@ -207,41 +252,15 @@ searchBtn.addEventListener("click", () => {
           const temperature = `${Math.round(todayWeather.main.temp)} °C`;
           const description = todayWeather.weather[0].description;
 
-          // Create a container for all data
-          const dataContainer = document.createElement("div");
-          dataContainer.classList.add("weather-info-hourly-data");
-
-          // Apply flexbox styling to the container
-          dataContainer.style.display = "flex";
-
-          // create image 3 hour period
-          let threeHoursImgElement = document.createElement("img");
-          threeHoursImgElement.src = getWeatherImage(description);
-          threeHoursImgElement.style.width = "4rem";
-          dataContainer.appendChild(threeHoursImgElement);
-
-          // Create and append time display
-          const timeDisplay = document.createElement("p");
-          timeDisplay.innerText = time;
-          timeDisplay.classList.add("weather-info-hourly-time");
-          dataContainer.appendChild(timeDisplay);
-
-          // Create and append description display
-          const descriptionDisplay = document.createElement("p");
-          descriptionDisplay.innerText = description;
-          descriptionDisplay.classList.add("weather-info-hourly-description");
-          dataContainer.appendChild(descriptionDisplay);
-
-          // Create and append temperature display
-          const temperatureDisplay = document.createElement("p");
-          temperatureDisplay.innerText = temperature;
-          temperatureDisplay.classList.add("weather-info-hourly-temperature");
-          dataContainer.appendChild(temperatureDisplay);
-
-          // Append the data container to the hourly container
-          weatherInfoHourlyContainer.appendChild(dataContainer);
-          displayBackgroundHourlyWeather();
+          createWeatherElement(
+            weatherInfoHourlyContainer,
+            time,
+            description,
+            temperature,
+            getWeatherImage
+          );
         });
+        displayBackgroundHourlyWeather();
 
         // /////////////// 5 Days PERIOD FUNCTIONALITY /////////////
         weatherInfoDailyContainer.innerText = "";
@@ -255,41 +274,16 @@ searchBtn.addEventListener("click", () => {
           const dailyTemp = `${Math.round(dailyWeather.main.temp)} °C`;
           const dailyDesc = dailyWeather.weather[0].description;
 
-          // Create a container for all data
-          const dailyDataContainer = document.createElement("div");
-          dailyDataContainer.classList.add("weather-info-daily-data");
-
-          // Apply flexbox styling to the container
-          dailyDataContainer.style.display = "flex";
-
-          // create image 5 days period
-          let fiveDaysImgElement = document.createElement("img");
-          fiveDaysImgElement.src = getWeatherImage(dailyDesc);
-          fiveDaysImgElement.style.width = "4rem";
-          dailyDataContainer.appendChild(fiveDaysImgElement);
-
-          // Create and append time display
-          const timeDisplay = document.createElement("p");
-          timeDisplay.innerText = dailyTime;
-          timeDisplay.classList.add("weather-info-daily-time");
-          dailyDataContainer.appendChild(timeDisplay);
-
-          // Create and append description display
-          const descriptionDisplay = document.createElement("p");
-          descriptionDisplay.innerText = dailyDesc;
-          descriptionDisplay.classList.add("weather-info-daily-description");
-          dailyDataContainer.appendChild(descriptionDisplay);
-
-          // Create and append temperature display
-          const temperatureDisplay = document.createElement("p");
-          temperatureDisplay.innerText = dailyTemp;
-          temperatureDisplay.classList.add("weather-info-daily-temperature");
-          dailyDataContainer.appendChild(temperatureDisplay);
-
-          // Append the data container to the hourly container
-          weatherInfoDailyContainer.appendChild(dailyDataContainer);
-          displayBackgroundDailyWeather();
+          createWeatherElement(
+            weatherInfoDailyContainer,
+            dailyTime,
+            dailyDesc,
+            dailyTemp,
+            getWeatherImage
+          );
         });
+
+        displayBackgroundDailyWeather();
 
         const showTodayArrayResult = WeatherData.filter((day) => {
           // Extract the date part from the dt_txt property
