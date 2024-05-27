@@ -2,6 +2,7 @@
 /* weather 5 days */
 
 .weather-info-daily-container {
+  max-width: 30rem;
   margin: 1.5rem auto 4rem;
   background: $primary-color;
   color: $primary-black;
@@ -12,9 +13,13 @@
   flex-direction: column;
   padding: 2rem 1rem 2rem 1rem;
   visibility: hidden;
-  box-shadow: 0 0 3rem $primary-black;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
 
   /* media for daily container */
+  @media only screen and (min-width: 375px) {
+    max-width: 35rem;
+  }
+
   @media only screen and (min-width: 1024px) {
     margin-top: 2rem;
     padding: 2rem 6rem 0 9rem;
@@ -58,6 +63,10 @@
   .weather-info-daily-description,
   .weather-info-daily-temperature {
     margin-left: 1rem;
+
+    @media only screen and (min-width: 375px) {
+      font-size: 2rem;
+    }
 
     @media only screen and (min-width: 1024px) {
       &.weather-info-daily-time {

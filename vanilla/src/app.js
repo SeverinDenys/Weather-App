@@ -35,26 +35,26 @@ const getWeatherImage = (description) => {
   switch (description) {
     case "light rain":
     case "moderate rain":
-      return "./images/rain2.png";
+      return "./public/images/rain2.png";
     case "shower rain":
-      return "./images/showerRain.png";
+      return "./public/images/showerRain.png";
     case "scattered clouds":
-      return "./images/scatteredClouds.png";
+      return "./public/images/scatteredClouds.png";
     case "few clouds":
-      return "./images/fewClouds.png";
+      return "./public/images/fewClouds.png";
     case "overcast clouds":
-      return "./images/brokenClouds.png";
+      return "./public/images/brokenClouds.png";
     case "broken clouds":
-      return "./images/brokenClouds.png";
+      return "./public/images/brokenClouds.png";
     case "clear sky":
-      return "./images/clearSky.png";
+      return "./public/images/clearSky.png";
     case "thunderstorm":
-      return "./images/thunderstorm.png";
+      return "./public/images/thunderstorm.png";
     case "snow":
     case "light snow":
-      return "./images/snow.png";
+      return "./public/images/snow.png";
     case "mist":
-      return "./images/mist.png";
+      return "./public/images/mist.png";
     default:
       return "";
   }
@@ -142,7 +142,7 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
-    const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
     fetch(weatherUrl)
       .then((response) => response.json())
@@ -200,7 +200,8 @@ searchBtn.addEventListener("click", () => {
     "locationInputCountry"
   ).value;
 
-  const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
+
   console.log(weatherUrl);
 
   const getWeatherTemperature = async () => {
