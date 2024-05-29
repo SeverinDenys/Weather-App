@@ -1,5 +1,4 @@
-const apiKey = "0711ba8995366ec70397a048be1bafb4";
-console.log(apiKey);
+const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 const searchBtn = document.getElementById("searchBtn");
 const chosenCity = document.getElementById("chosenCity");
 const temp = document.querySelector(".weather-info-temperature");
@@ -12,20 +11,21 @@ const currentLocationDescription = document.getElementById(
   "currentTemperatureDescription"
 );
 
-const weatherInfo = document.getElementById("weather-info");
+// you have declared variables which aren't being used anywhere
+// const weatherInfo = document.getElementById("weather-info");
 
 const weatherInfoHourlyContainer = document.querySelector(
   ".weather-info-hourly-container"
 );
-const weatherInfoHourlyTime = document.querySelector(
-  ".weather-info-hourly-time"
-);
-const weatherInfoHourlyDescription = document.querySelector(
-  ".weather-info-hourly-description"
-);
-const weatherInfoHourlyTemperature = document.querySelector(
-  ".weather-info-hourly-temperature"
-);
+// const weatherInfoHourlyTime = document.querySelector(
+//   ".weather-info-hourly-time"
+// );
+// const weatherInfoHourlyDescription = document.querySelector(
+//   ".weather-info-hourly-description"
+// );
+// const weatherInfoHourlyTemperature = document.querySelector(
+//   ".weather-info-hourly-temperature"
+// );
 
 const weatherInfoDailyContainer = document.querySelector(
   ".weather-info-daily-container"
@@ -135,8 +135,6 @@ const createWeatherElement = (
   container.appendChild(dataContainer);
 };
 
-// Hide this API key ... HOW?
-
 // get you current position weather information
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
@@ -150,6 +148,7 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
         const currentLocationCityAndCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
         currentLocation.innerText = currentLocationCityAndCountry;
         const localTemperature = Math.floor(weatherData.list[0].main.temp);
+        // consider using text transform for this text
         const localTempDescription = weatherData.list[0].weather[0].description;
         currentLocationDescription.innerText = localTempDescription;
         currentLocationTemperature.innerText = `${localTemperature} °C`;
@@ -202,6 +201,7 @@ searchBtn.addEventListener("click", () => {
 
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
 
+  // remove console.logs once you finish
   console.log(weatherUrl);
 
   const getWeatherTemperature = async () => {
@@ -230,6 +230,8 @@ searchBtn.addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${getWeatherBackground(
           weatherDescription
         )})`; //
+
+        // remove console.logs
         console.log(getWeatherBackground(weatherDescription));
 
         // Reset input field after displaying weather information
