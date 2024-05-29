@@ -32,6 +32,7 @@ const weatherInfoDailyContainer = document.querySelector(
 );
 
 const getWeatherImage = (description) => {
+  // removing the 'public' part - not needed
   switch (description) {
     case "light rain":
     case "moderate rain":
