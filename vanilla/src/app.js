@@ -35,26 +35,26 @@ const getWeatherImage = (description) => {
   switch (description) {
     case "light rain":
     case "moderate rain":
-      return "./public/images/rain2.png";
+      return "./images/rain2.png";
     case "shower rain":
-      return "./public/images/showerRain.png";
+      return "./images/showerRain.png";
     case "scattered clouds":
-      return "./public/images/scatteredClouds.png";
+      return "./images/scatteredClouds.png";
     case "few clouds":
-      return "./public/images/fewClouds.png";
+      return "./images/fewClouds.png";
     case "overcast clouds":
-      return "./public/images/brokenClouds.png";
+      return "./images/brokenClouds.png";
     case "broken clouds":
-      return "./public/images/brokenClouds.png";
+      return "./images/brokenClouds.png";
     case "clear sky":
-      return "./public/images/clearSky.png";
+      return "./images/clearSky.png";
     case "thunderstorm":
-      return "./public/images/thunderstorm.png";
+      return "./images/thunderstorm.png";
     case "snow":
     case "light snow":
-      return "./public/images/snow.png";
+      return "./images/snow.png";
     case "mist":
-      return "./public/images/mist.png";
+      return "./images/mist.png";
     default:
       return "";
   }
