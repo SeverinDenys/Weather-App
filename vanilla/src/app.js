@@ -1,5 +1,4 @@
-const apiKey = "0711ba8995366ec70397a048be1bafb4";
-console.log(apiKey);
+const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 const searchBtn = document.getElementById("searchBtn");
 const chosenCity = document.getElementById("chosenCity");
 const temp = document.querySelector(".weather-info-temperature");
@@ -12,49 +11,51 @@ const currentLocationDescription = document.getElementById(
   "currentTemperatureDescription"
 );
 
-const weatherInfo = document.getElementById("weather-info");
+// you have declared variables which aren't being used anywhere
+// const weatherInfo = document.getElementById("weather-info");
 
 const weatherInfoHourlyContainer = document.querySelector(
   ".weather-info-hourly-container"
 );
-const weatherInfoHourlyTime = document.querySelector(
-  ".weather-info-hourly-time"
-);
-const weatherInfoHourlyDescription = document.querySelector(
-  ".weather-info-hourly-description"
-);
-const weatherInfoHourlyTemperature = document.querySelector(
-  ".weather-info-hourly-temperature"
-);
+// const weatherInfoHourlyTime = document.querySelector(
+//   ".weather-info-hourly-time"
+// );
+// const weatherInfoHourlyDescription = document.querySelector(
+//   ".weather-info-hourly-description"
+// );
+// const weatherInfoHourlyTemperature = document.querySelector(
+//   ".weather-info-hourly-temperature"
+// );
 
 const weatherInfoDailyContainer = document.querySelector(
   ".weather-info-daily-container"
 );
 
 const getWeatherImage = (description) => {
+  // removing the 'public' part - not needed
   switch (description) {
     case "light rain":
     case "moderate rain":
-      return "./public/images/rain2.png";
+      return "./images/rain2.png";
     case "shower rain":
-      return "./public/images/showerRain.png";
+      return "./images/showerRain.png";
     case "scattered clouds":
-      return "./public/images/scatteredClouds.png";
+      return "./images/scatteredClouds.png";
     case "few clouds":
-      return "./public/images/fewClouds.png";
+      return "./images/fewClouds.png";
     case "overcast clouds":
-      return "./public/images/brokenClouds.png";
+      return "./images/brokenClouds.png";
     case "broken clouds":
-      return "./public/images/brokenClouds.png";
+      return "./images/brokenClouds.png";
     case "clear sky":
-      return "./public/images/clearSky.png";
+      return "./images/clearSky.png";
     case "thunderstorm":
-      return "./public/images/thunderstorm.png";
+      return "./images/thunderstorm.png";
     case "snow":
     case "light snow":
-      return "./public/images/snow.png";
+      return "./images/snow.png";
     case "mist":
-      return "./public/images/mist.png";
+      return "./images/mist.png";
     default:
       return "";
   }
@@ -135,8 +136,6 @@ const createWeatherElement = (
   container.appendChild(dataContainer);
 };
 
-// Hide this API key ... HOW?
-
 // get you current position weather information
 const currentLocationPosition = navigator.geolocation.getCurrentPosition(
   (position) => {
@@ -150,6 +149,7 @@ const currentLocationPosition = navigator.geolocation.getCurrentPosition(
         const currentLocationCityAndCountry = `${weatherData.city.name}, ${weatherData.city.country}`;
         currentLocation.innerText = currentLocationCityAndCountry;
         const localTemperature = Math.floor(weatherData.list[0].main.temp);
+        // consider using text transform for this text
         const localTempDescription = weatherData.list[0].weather[0].description;
         currentLocationDescription.innerText = localTempDescription;
         currentLocationTemperature.innerText = `${localTemperature} °C`;
@@ -202,6 +202,7 @@ searchBtn.addEventListener("click", () => {
 
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${locationInputCity},${locationInputCountry}&appid=${apiKey}&units=metric`;
 
+  // remove console.logs once you finish
   console.log(weatherUrl);
 
   const getWeatherTemperature = async () => {
@@ -230,6 +231,8 @@ searchBtn.addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${getWeatherBackground(
           weatherDescription
         )})`; //
+
+        // remove console.logs
         console.log(getWeatherBackground(weatherDescription));
 
         // Reset input field after displaying weather information
